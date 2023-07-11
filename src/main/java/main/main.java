@@ -8,6 +8,11 @@ import net.dv8tion.jda.api.sharding.ShardManager;
 
 import javax.security.auth.login.LoginException;
 
+import com.sedmelluq.discord.lavaplayer.player.AudioPlayerManager;
+import com.sedmelluq.discord.lavaplayer.player.DefaultAudioPlayerManager;
+import com.sedmelluq.discord.lavaplayer.source.AudioSourceManager;
+import com.sedmelluq.discord.lavaplayer.source.AudioSourceManagers;
+
 import io.github.cdimascio.dotenv.Dotenv;
 
 public class main {
@@ -18,7 +23,12 @@ public class main {
 
     private final ShardManager shardManager;
 
+    public AudioPlayerManager audioPlayerManager;
+
     public main() throws LoginException {
+        this.audioPlayerManager = new DefaultAudioPlayerManager();
+        AudioSourceManagers.registerLocalSource(audioPlayerManager);
+        audioPlayerManager.getConfiguration().setFilterHotSwapEnabled(true);
         DefaultShardManagerBuilder builder = DefaultShardManagerBuilder.createDefault(token);
         builder.setStatus(OnlineStatus.ONLINE);
         builder.setActivity(Activity.playing(status));
