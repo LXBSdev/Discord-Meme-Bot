@@ -89,6 +89,21 @@ public class commands extends ListenerAdapter {
                     event.replyEmbeds(emb.build()).queue();
                 }
             }
-        }   
+        }
+        
+        if (command.equals("join")) {
+            AudioManager manager = event.getGuild().getAudioManager();
+            AudioChannel channel = event.getMember().getVoiceState().getChannel();
+            EmbedBuilder emb = new EmbedBuilder();
+            if (!manager.isConnected()) {
+                emb.setDescription("Hello there!");
+                manager.openAudioConnection(channel);
+                manager.setSelfDeafened(true);
+                event.replyEmbeds(emb.build()).queue();
+            } else {
+                emb.setDescription("Sorry, I'm already rickrolling someone else");
+                event.replyEmbeds(emb.build()).queue();
+            }
+        }
     }
 }

@@ -22,6 +22,7 @@ public class commandRegister extends ListenerAdapter {
                 commandData.add(Commands.slash("respect", "Pay respect")
                                 .addOption(OptionType.USER, "user", "who you want to pay respect to", true));
                 commandData.add(Commands.slash("leave", "Make the bot leave from voice"));
+                commandData.add(Commands.slash("join", "Make the bot join"));
                 event.getGuild().updateCommands().addCommands(commandData).queue();
         }
 
@@ -33,6 +34,7 @@ public class commandRegister extends ListenerAdapter {
                 commandData.add(Commands.slash("respect", "Pay respect")
                                 .addOption(OptionType.USER, "user", "who you want to pay respect to", true));
                 commandData.add(Commands.slash("leave", "Make the bot leave from voice"));
+                commandData.add(Commands.slash("join", "Make the bot join"));
                 event.getGuild().updateCommands().addCommands(commandData).queue();
         }
 }
