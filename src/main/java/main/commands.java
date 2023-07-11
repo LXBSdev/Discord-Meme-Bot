@@ -5,6 +5,7 @@ import net.dv8tion.jda.api.entities.*;
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import net.dv8tion.jda.api.interactions.components.buttons.Button;
+import net.dv8tion.jda.api.managers.AudioManager;
 
 import java.time.format.DateTimeFormatter;
 import java.util.List;
@@ -77,5 +78,17 @@ public class commands extends ListenerAdapter {
             event.reply(member.getAsMention()
                     + "\n https://tenor.com/view/keyboard-hyperx-rgb-hyperx-family-hyperx-gaming-gif-17743649").queue();
         }
+
+        if (command.equals("leave")) {
+            AudioManager manager = event.getGuild().getAudioManager();
+            EmbedBuilder emb = new EmbedBuilder();
+            if (manager.isConnected()) {
+                if (event.getMember().getVoiceState().getChannel() == manager.getConnectedChannel()) {
+                    emb.setDescription("I already realise when I'm unwanted :/");
+                    manager.closeAudioConnection();
+                    event.replyEmbeds(emb.build()).queue();
+                }
+            }
+        }   
     }
 }

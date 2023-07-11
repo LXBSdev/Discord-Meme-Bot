@@ -2,8 +2,10 @@ package main;
 
 import javax.annotation.Nonnull;
 
+import net.dv8tion.jda.api.entities.AudioChannel;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
+import net.dv8tion.jda.api.managers.AudioManager;
 
 public class memes extends ListenerAdapter {
 
@@ -41,6 +43,21 @@ public class memes extends ListenerAdapter {
 
                 if (event.getMessage().getContentStripped().toUpperCase().contains("STAL")) {
                     event.getMessage().reply("https://www.youtube.com/watch?v=NhqxP91_CdI").queue();
+                }
+
+                if (event.getMessage().getContentStripped().toUpperCase().contains("FUNKE")) {
+                    event.getMessage().reply("https://youtu.be/jP_ztxJhfA0").queue();
+                }
+
+                if (event.getMessage().getContentStripped().toUpperCase().contains("WATER")) {
+                    event.getMessage().reply("https://media.tenor.com/OsnAgZjC-kQAAAAd/underwater-hello-im-under-water.gif").queue();
+                    if (event.getMember().getVoiceState() != null) {
+                        AudioChannel channel = event.getMember().getVoiceState().getChannel();
+                        AudioManager manager = event.getGuild().getAudioManager();
+
+                        manager.openAudioConnection(channel);
+                        manager.setSelfDeafened(true);
+                    }
                 }
             }
         }
